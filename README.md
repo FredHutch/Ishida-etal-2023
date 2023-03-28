@@ -1,2 +1,9 @@
-# Ishida-etal-2023
-Repo for the computational code used in Ishida et al. 2023, submitted.
+# Symmetric self-renewal and dormancy define functional fetal liver hematopoietic stem cells at single cell resolution
+
+Repository for the code used in all computational analyses for the Ishida et al. 2023 submitted manuscript.
+
+URL TBD
+
+The computational analysis was done in R using primarily Monocle3 and dependency packages. The sections of code used to create specific figure panels are designated in the comments of the file.
+
+For questions regarding the code, please contact the corresponding author.
