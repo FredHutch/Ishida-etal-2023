@@ -1,4 +1,4 @@
-# Symmetric self-renewal and dormancy define functional fetal liver hematopoietic stem cells at single cell resolution
+# Latent symmetric self-renewal of fetal liver hematopoietic stem cells at single cell resolution 
 
 Repository for the code used in all computational analyses for the Ishida et al. 2023 submitted manuscript.
 
