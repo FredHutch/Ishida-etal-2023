@@ -1,4 +1,4 @@
-# Latent symmetric self-renewal of fetal liver hematopoietic stem cells at single cell resolution 
+# Differentiation latency and dormancy signatures define fetal liver HSCs at single cell resolution 
 
 Repository for the code used in all computational analyses for the Ishida et al. 2023 submitted manuscript.
 
