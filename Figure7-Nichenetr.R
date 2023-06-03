@@ -33,10 +33,7 @@ cds <- cluster_cells(cds)
 cluster <- clusters(cds)
 plot_cells(cds)
 
-
-#List of all mitochondrial genes by Ensembl ID
 mito_genes_updated <- c("ENSMUSG00000064351", "ENSMUSG00000064354", "ENSMUSG00000064370", "ENSMUSG00000064357")
-
 num_mito <- Matrix::colSums(counts(cds[mito_genes_updated]))
 cds$n.mito <- num_mito
 cds
