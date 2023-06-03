@@ -82,7 +82,6 @@ cds<-preprocess_cds(cds)
 cds<-m3addon::reduce_dimension(cds, reduction_method = "UMAP", preprocess_method = "PCA", verbose=T, cores=detectCores()/2)
 
 #Remove cells with high content of mitochondrial genes
-#List of all mitochondrial genes by Ensembl ID
 mito_genes_updated <- c("ENSMUSG00000064351", "ENSMUSG00000064354", "ENSMUSG00000064370", "ENSMUSG00000064357")
 
 num_mito <- Matrix::colSums(counts(cds[mito_genes_updated]))
@@ -485,19 +484,16 @@ p
 #REPOSIG : EMBO Reports (2022)23:e55502https://doi.org/10.15252/embr.202255502
 #High output score: Nature volume 583, pages585–589 (2020)
 #Multilineage score: Nature volume 583, pages585–589 (2020)
-
 #Activated HSC/MMP score : : Cell, Volume 169, Issue 5, 18 May 2017, Pages 807-823.e19, Cell Stem Cell, Volume 29, Issue 1, 6 January 2022, Pages 131-148.e10
-
 #Mouse Gene Set: HALLMARK_MYC_TARGETS_V1,	MM3887, https://www.gsea-msigdb.org/gsea/msigdb/mouse/geneset/HALLMARK_MYC_TARGETS_V1.html
 #Mouse Gene Set: HALLMARK_MYC_TARGETS_V2, MM2888, https://www.gsea-msigdb.org/gsea/msigdb/mouse/geneset/HALLMARK_MYC_TARGETS_V2.html
 #WP_TCA_CYCLE, MM15856, WP434, http://www.gsea-msigdb.org/gsea/msigdb/mouse/geneset/WP_TCA_CYCLE.html
-#	Mouse Gene Set: WP_PURINE_METABOLISM,	WP2185, https://www.gsea-msigdb.org/gsea/msigdb/mouse/geneset/WP_PURINE_METABOLISM.html
-#	HALLMARK_OXIDATIVE_PHOSPHORYLATION, MM3893, http://www.gsea-msigdb.org/gsea/msigdb/mouse/geneset/HALLMARK_OXIDATIVE_PHOSPHORYLATION.html,  http://www.broadinstitute.org/gsea/msigdb/cards/HALLMARK_OXIDATIVE_PHOSPHORYLATION
+#Mouse Gene Set: WP_PURINE_METABOLISM,	WP2185, https://www.gsea-msigdb.org/gsea/msigdb/mouse/geneset/WP_PURINE_METABOLISM.html
+#HALLMARK_OXIDATIVE_PHOSPHORYLATION, MM3893, http://www.gsea-msigdb.org/gsea/msigdb/mouse/geneset/HALLMARK_OXIDATIVE_PHOSPHORYLATION.html,  http://www.broadinstitute.org/gsea/msigdb/cards/HALLMARK_OXIDATIVE_PHOSPHORYLATION
 #WP_MRNA_PROCESSING, MM15946, WP31, https://www.gsea-msigdb.org/gsea/msigdb/mouse/geneset/WP_MRNA_PROCESSING.html
 #REACTOME_TRANSLATION, MM15420, R-MMU-72766, https://www.gsea-msigdb.org/gsea/msigdb/mouse/geneset/REACTOME_TRANSLATION.html
 #WP_CHEMOKINE_SIGNALING_PATHWAY, MM15943, WP2292, http://www.gsea-msigdb.org/gsea/msigdb/mouse/geneset/WP_CHEMOKINE_SIGNALING_PATHWAY.html
-
-#Engraft FL-HSC colony genes
+#Serially engrafting FL-HSC genes(Table S5)
 
 
 #Figure S4F
