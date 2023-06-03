@@ -72,7 +72,6 @@ cluster <- clusters(cds)
 plot_cells(cds)
 
 #Remove cells with high content of mitochondrial genes
-#List of all mitochondrial genes by Ensembl ID
 mito_genes_updated <- c("ENSMUSG00000064351", "ENSMUSG00000064354", "ENSMUSG00000064370", "ENSMUSG00000064357")
 
 #Now calculate the number of umis associated with mitochondrial reads for each cell
@@ -223,16 +222,13 @@ plot_cells(cds, color_cells_by = 'Dormancy', cell_size = 2, show_trajectory_grap
 #WP_CHEMOKINE_SIGNALING_PATHWAY, MM15943, WP2292, http://www.gsea-msigdb.org/gsea/msigdb/mouse/geneset/WP_CHEMOKINE_SIGNALING_PATHWAY.html
 #High output score: Nature volume 583, pages585–589 (2020)
 #Multilineage score: Nature volume 583, pages585–589 (2020)
-
 #Activated HSC/MMP score: : Cell, Volume 169, Issue 5, 18 May 2017, Pages 807-823.e19, Cell Stem Cell, Volume 29, Issue 1, 6 January 2022, Pages 131-148.e10
-
 #Mouse Gene Set: HALLMARK_MYC_TARGETS_V1, 	MM3887, https://www.gsea-msigdb.org/gsea/msigdb/mouse/geneset/HALLMARK_MYC_TARGETS_V1.html
 #Mouse Gene Set: HALLMARK_MYC_TARGETS_V2, MM2888, https://www.gsea-msigdb.org/gsea/msigdb/mouse/geneset/HALLMARK_MYC_TARGETS_V2.html
 #WP_TCA_CYCLE, MM15856, WP434, http://www.gsea-msigdb.org/gsea/msigdb/mouse/geneset/WP_TCA_CYCLE.html
 #HALLMARK_OXIDATIVE_PHOSPHORYLATION, MM3893, http://www.gsea-msigdb.org/gsea/msigdb/mouse/geneset/HALLMARK_OXIDATIVE_PHOSPHORYLATION.html,  http://www.broadinstitute.org/gsea/msigdb/cards/HALLMARK_OXIDATIVE_PHOSPHORYLATION
 #Mouse Gene Set: WP_PURINE_METABOLISM,	WP2185, https://www.gsea-msigdb.org/gsea/msigdb/mouse/geneset/WP_PURINE_METABOLISM.html
-
-#Engraft FL-HSC colony genes (generated from Figure4 study)
+#Serially engrafting FL-HSC genes(Table S5)
 
 #Heatmap
 avg_score_matrix<-function(cds, cell_group, scores){
@@ -290,8 +286,6 @@ avg_score_heatmap(cds, "group",
 
 #Figure3E, FigureS2E
 #Gene module analysis
-
-#q<0.05
 pr_graph_test_res <- graph_test(cds, neighbor_graph="knn", cores=8)
 pr_deg_ids <- row.names(subset(pr_graph_test_res, q_value < 0.05))
 set.seed(1) 
