@@ -1,4 +1,23 @@
-#Figure S11
+library(monocle3)
+library(VGAM)  
+library(viridis)
+library(stringr)
+library(tibble) 
+library(reticulate)
+library(pheatmap)
+library(dplyr)
+library(magrittr)
+library(ggplot2)
+library(garnett)
+library(mygene)
+library(ggsci)
+library(ggpubr)
+library(viridis)
+library(leidenbase)
+library(sf)
+library(Rcpp)
+library(magrittr)
+library(scales)
 
 #read cds
 cds1 <- load_cellranger_data("-")
@@ -126,9 +145,10 @@ plot_cells(cds, genes=c("CDH5"), cell_size = 1, label_cell_groups = F)
 cds<-choose_cells(cds)
 
 #save cds
-RES_DIR <- file.path("-")
-saveRDS(cds, file.path(RES_DIR, "-")) 
+RES_DIR <- file.path("/Users")
+saveRDS(cds, file.path(RES_DIR, "/Users/Figure S11")) 
 
+#Figure S11B
 #clustering
 set.seed(1)
 cds <- cluster_cells(cds, resolution=0.05, random_seed = 1)
@@ -174,8 +194,8 @@ plot_cells(cds, color_cells_by = "group", cell_size=2, label_cell_groups=T, grou
 #color 
 mycol <- c("navy", "blue", "cyan", "lightcyan", "yellow", "red", "red4")
 
-##HSC_Cycle_Primed signature:Garcia-Prat et al Cell Stem Cell 2021.
-#Cell Stem Cell. 2021 Oct 7;28(10):1838-1850.e10. doi: 10.1016/j.stem.2021.07.003.
+#Figure S11C
+#Cell Stem Cell. 2021 Oct 7;28(10):1838-1850.e10.
 RES_DIR <- file.path("-")
 estimate_score <- function(cds,gene_markers){
   cds_gene = cds[fData(cds)$gene_short_name %in% gene_markers,]
@@ -186,12 +206,18 @@ estimate_score <- function(cds,gene_markers){
   return(cds)
 }
 
-gene_markers <- c(read.csv(file.path(RES_DIR, "-.csv")))
+gene_markers <- c(read.csv(file.path(RES_DIR, "HSCPRIMED.csv")))
 cds <- estimate_score(cds, gene_markers = gene_markers$HSCPRIMED)
 plot_cells(cds, color_cells_by = 'HSCPRIMED', cell_size = 1, show_trajectory_graph = F)  +
   scale_color_gradientn(colours = mycol) + simple_theme
 
-#Checked each gene-set score
+#Activated HSC genes:Cell Stem Cell. 2021 Oct 7;28(10):1838-1850.e10. doi: 10.1016/j.stem.2021.07.003.
+#Human Gene Set: HALLMARK_MYC_TARGETS_V1, M5926
+#Human Gene Set:HALLMARK_MYC_TARGETS_V2, M5928
+#Quiescent HSC genes:Cell Stem Cell. 2021 Oct 7;28(10):1838-1850.e10. doi: 10.1016/j.stem.2021.07.003.
+#HSC Signature:Nature. 2022 Apr;604(7906):534-540.
+#GOBP_REGULATION_OF_LIPID_METABOLIC_PROCESS,M12303, GO:0019216
+#Related to lipid metabolism and lysosome: Nat Cell Biol. 2024 Feb;26(2):181-193.
 
 #Heatmap
 avg_score_matrix<-function(cds, cell_group, scores){
@@ -221,6 +247,7 @@ pheatmap(mat[c("HSCPRIMED","Activated","MYCV1","MYCV2"
          , cellheight = 40
          , cellwidth = 75) 
 
+#Figure S11D-E
 #Gene module analysis
 pr_graph_test_res <- graph_test(cds, neighbor_graph="knn", cores=8)
 pr_deg_ids <- row.names(subset(pr_graph_test_res, q_value < 0.05))
@@ -253,46 +280,6 @@ mod1_genes<-gene_module_df%>%dplyr::filter(module==1)
 names(mod1_genes)[1]<-"gene_id"
 mod1_genes_names<-merge(mod1_genes,pr_graph_test_res,by.x="gene_id",by.y="id")
 mod1_genes_names<-mod1_genes_names[,c(1,9,10,11,12)]
-write.csv(mod1_genes_names, "/Users/ti/Desktop/human scRNAseq/Aldinger-T21/HD-FL only analysis, 122424/onlyHSC/post/mod1.csv")
+write.csv(mod1_genes_names, "/Users/mod1.csv")
 
-mod2_genes<-gene_module_df%>%dplyr::filter(module==2)
-names(mod2_genes)[1]<-"gene_id"
-mod2_genes_names<-merge(mod2_genes,pr_graph_test_res,by.x="gene_id",by.y="id")
-mod2_genes_names<-mod2_genes_names[,c(1,9,10,11,12)]
-write.csv(mod2_genes_names, "/Users/ti/Desktop/human scRNAseq/Aldinger-T21/HD-FL only analysis, 122424/onlyHSC/post/mod2.csv")
-
-mod3_genes<-gene_module_df%>%dplyr::filter(module==3)
-names(mod3_genes)[1]<-"gene_id"
-mod3_genes_names<-merge(mod3_genes,pr_graph_test_res,by.x="gene_id",by.y="id")
-mod3_genes_names<-mod3_genes_names[,c(1,9,10,11,12)]
-write.csv(mod3_genes_names, "/Users/ti/Desktop/human scRNAseq/Aldinger-T21/HD-FL only analysis, 122424/onlyHSC/post/mod3.csv")
-
-mod4_genes<-gene_module_df%>%dplyr::filter(module==4)
-names(mod4_genes)[1]<-"gene_id"
-mod4_genes_names<-merge(mod4_genes,pr_graph_test_res,by.x="gene_id",by.y="id")
-mod4_genes_names<-mod4_genes_names[,c(1,9,10,11,12)]
-write.csv(mod4_genes_names, "/Users/ti/Desktop/human scRNAseq/Aldinger-T21/HD-FL only analysis, 122424/onlyHSC/post/mod4.csv")
-
-mod5_genes<-gene_module_df%>%dplyr::filter(module==5)
-names(mod5_genes)[1]<-"gene_id"
-mod5_genes_names<-merge(mod5_genes,pr_graph_test_res,by.x="gene_id",by.y="id")
-mod5_genes_names<-mod5_genes_names[,c(1,9,10,11,12)]
-write.csv(mod5_genes_names, "/Users/ti/Desktop/human scRNAseq/Aldinger-T21/HD-FL only analysis, 122424/onlyHSC/post/mod5.csv")
-
-mod6_genes<-gene_module_df%>%dplyr::filter(module==6)
-names(mod6_genes)[1]<-"gene_id"
-mod6_genes_names<-merge(mod6_genes,pr_graph_test_res,by.x="gene_id",by.y="id")
-mod6_genes_names<-mod6_genes_names[,c(1,9,10,11,12)]
-write.csv(mod6_genes_names, "/Users/ti/Desktop/human scRNAseq/Aldinger-T21/HD-FL only analysis, 122424/onlyHSC/post/mod6.csv")
-
-mod7_genes<-gene_module_df%>%dplyr::filter(module==7)
-names(mod7_genes)[1]<-"gene_id"
-mod7_genes_names<-merge(mod7_genes,pr_graph_test_res,by.x="gene_id",by.y="id")
-mod7_genes_names<-mod7_genes_names[,c(1,9,10,11,12)]
-write.csv(mod7_genes_names, "/Users/ti/Desktop/human scRNAseq/Aldinger-T21/HD-FL only analysis, 122424/onlyHSC/post/mod7.csv")
-
-mod8_genes<-gene_module_df%>%dplyr::filter(module==8)
-names(mod8_genes)[1]<-"gene_id"
-mod8_genes_names<-merge(mod8_genes,pr_graph_test_res,by.x="gene_id",by.y="id")
-mod8_genes_names<-mod8_genes_names[,c(1,9,10,11,12)]
-write.csv(mod8_genes_names, "/Users/ti/Desktop/human scRNAseq/Aldinger-T21/HD-FL only analysis, 122424/onlyHSC/post/mod8.csv")
+#use the code for the rest of modules
