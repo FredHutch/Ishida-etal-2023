@@ -52,7 +52,7 @@ simple_themeT <-  theme(text = element_text(size=25),
 RES_DIR <-file.path("/Users")
 
 #load cds 
-cds1<-load_cellranger_data("/Users/ti/Desktop/Paper figures 012023/WT-FL-Ceccacci/sample1")
+cds1<-load_cellranger_data("/Users")
 cds1
 
 # Remove low UMIs (konoatoni,mitokondoria wo jokyosuruto,preprocess gaumakuikanai)
@@ -70,7 +70,7 @@ summary(pData(cds1)$num_genes_expressed)
 cds1
 
 #load cds 
-cds2<-load_cellranger_data("/Users/ti/Desktop/Paper figures 012023/WT-FL-Ceccacci/sample2")
+cds2<-load_cellranger_data("/Users")
 cds2
 
 # Remove low UMIs (konoatoni,mitokondoria wo jokyosuruto,preprocess gaumakuikanai)
@@ -209,7 +209,6 @@ plot_cells(cds, color_cells_by = 'proliferation_index', cell_size = 2, show_traj
   scale_color_gradientn(colours = mycol) + simple_theme
 
 #Figure S3D, E, F
-#Gene-set scores among clusters
 #cluster cells
 set.seed(1)
 cds <- cluster_cells(cds, resolution=0.2, random_seed = 1)
@@ -239,7 +238,6 @@ colData(cds)$group = dplyr::recode(colData(cds)$group,
                                    "11" = "K")
 colData(cds)
 table(pData(cds)$group)
-##make sure that grouping worked
 plot_cells(cds, color_cells_by = "group", cell_size=2, label_cell_groups=T, group_label_size=15) + simple_theme
 
 #Gene module analysis
@@ -279,76 +277,17 @@ mod1_genes<-gene_module_df%>%dplyr::filter(module==1)
 names(mod1_genes)[1]<-"gene_id"
 mod1_genes_names<-merge(mod1_genes,pr_graph_test_res,by.x="gene_id",by.y="id")
 mod1_genes_names<-mod1_genes_names[,c(1,9,10,11,12)]
-write.csv(mod1_genes_names, "/Users/ti/Desktop/mod1.csv")
+write.csv(mod1_genes_names, "/Users/mod1.csv")
 
-mod2_genes<-gene_module_df%>%dplyr::filter(module==2)
-names(mod2_genes)[1]<-"gene_id"
-mod2_genes_names<-merge(mod2_genes,pr_graph_test_res,by.x="gene_id",by.y="id")
-mod2_genes_names<-mod2_genes_names[,c(1,9,10,11,12)]
-write.csv(mod2_genes_names, "/Users/ti/Desktop/mod2.csv")
-
-mod3_genes<-gene_module_df%>%dplyr::filter(module==3)
-names(mod3_genes)[1]<-"gene_id"
-mod3_genes_names<-merge(mod3_genes,pr_graph_test_res,by.x="gene_id",by.y="id")
-mod3_genes_names<-mod3_genes_names[,c(1,9,10,11,12)]
-write.csv(mod3_genes_names, "/Users/ti/Desktop/mod3.csv")
-
-mod4_genes<-gene_module_df%>%dplyr::filter(module==4)
-names(mod4_genes)[1]<-"gene_id"
-mod4_genes_names<-merge(mod4_genes,pr_graph_test_res,by.x="gene_id",by.y="id")
-mod4_genes_names<-mod4_genes_names[,c(1,9,10,11,12)]
-write.csv(mod4_genes_names, "/Users/ti/Desktop/mod4.csv")
-
-mod5_genes<-gene_module_df%>%dplyr::filter(module==5)
-names(mod5_genes)[1]<-"gene_id"
-mod5_genes_names<-merge(mod5_genes,pr_graph_test_res,by.x="gene_id",by.y="id")
-mod5_genes_names<-mod5_genes_names[,c(1,9,10,11,12)]
-write.csv(mod5_genes_names, "/Users/ti/Desktop/mod5.csv")
-
-mod6_genes<-gene_module_df%>%dplyr::filter(module==6)
-names(mod6_genes)[1]<-"gene_id"
-mod6_genes_names<-merge(mod6_genes,pr_graph_test_res,by.x="gene_id",by.y="id")
-mod6_genes_names<-mod6_genes_names[,c(1,9,10,11,12)]
-write.csv(mod6_genes_names, "/Users/ti/Desktop/mod6.csv")
-
-mod7_genes<-gene_module_df%>%dplyr::filter(module==7)
-names(mod7_genes)[1]<-"gene_id"
-mod7_genes_names<-merge(mod7_genes,pr_graph_test_res,by.x="gene_id",by.y="id")
-mod7_genes_names<-mod7_genes_names[,c(1,9,10,11,12)]
-write.csv(mod7_genes_names, "/Users/ti/Desktop/mod7.csv")
-
-mod8_genes<-gene_module_df%>%dplyr::filter(module==8)
-names(mod8_genes)[1]<-"gene_id"
-mod8_genes_names<-merge(mod8_genes,pr_graph_test_res,by.x="gene_id",by.y="id")
-mod8_genes_names<-mod8_genes_names[,c(1,9,10,11,12)]
-write.csv(mod8_genes_names, "/Users/ti/Desktop/mod8.csv")
-
-mod9_genes<-gene_module_df%>%dplyr::filter(module==9)
-names(mod9_genes)[1]<-"gene_id"
-mod9_genes_names<-merge(mod9_genes,pr_graph_test_res,by.x="gene_id",by.y="id")
-mod9_genes_names<-mod9_genes_names[,c(1,9,10,11,12)]
-write.csv(mod9_genes_names, "/Users/ti/Desktop/mod9.csv")
-
-mod10_genes<-gene_module_df%>%dplyr::filter(module==10)
-names(mod10_genes)[1]<-"gene_id"
-mod10_genes_names<-merge(mod10_genes,pr_graph_test_res,by.x="gene_id",by.y="id")
-mod10_genes_names<-mod10_genes_names[,c(1,9,10,11,12)]
-write.csv(mod10_genes_names, "/Users/ti/Desktop/mod10.csv")
-
-mod11_genes<-gene_module_df%>%dplyr::filter(module==11)
-names(mod11_genes)[1]<-"gene_id"
-mod11_genes_names<-merge(mod11_genes,pr_graph_test_res,by.x="gene_id",by.y="id")
-mod11_genes_names<-mod11_genes_names[,c(1,9,10,11,12)]
-write.csv(mod11_genes_names, "/Users/ti/Desktop/mod11.csv")
-
+#use the code for the rest of modules
 
 #Figure S3G
 #Gene-set scores
 #color 
 mycol <- c("navy", "blue", "cyan", "lightcyan", "yellow", "red", "red4")
 
-#Dormancy score (Cell2017, Dormancy, by Cabezas-Wallscheid, Trumpp et.al, 7DOI:https://doi.org/10.1016/j.cell.2017.04.018)
-RES_DIR <- file.path("/Users/ti/Desktop/mouse gene-sets")
+#Dormancy score (Cell . 2017 May 18;169(5):807-823.e19.)
+RES_DIR <- file.path("/Users")
 
 estimate_score <- function(cds,gene_markers){
   cds_gene = cds[fData(cds)$gene_short_name %in% gene_markers,] 
@@ -365,199 +304,18 @@ plot_cells(cds, color_cells_by = 'Dormancy', cell_size = 2, show_trajectory_grap
   scale_color_gradientn(colours = mycol)+simple_theme
 
 
-#serial transplantable score: Nature volume 583, pages585–589 (2020)
-RES_DIR <- file.path("/Users/ti/Desktop/mouse gene-sets")
-
-estimate_score <- function(cds,gene_markers){
-  cds_gene = cds[fData(cds)$gene_short_name %in% gene_markers,] 
-  aggregate_gene = exprs(cds_gene)
-  aggregate_gene = Matrix::t(Matrix::t(aggregate_gene) / pData(cds_gene)$Size_Factor)
-  aggregate_gene = Matrix::colSums(aggregate_gene)
-  pData(cds)$SerialTransplant = log(aggregate_gene +1) ##not sure if this is really needed?
-  return(cds)
-}
-
-gene_markers <- c(read.csv(file.path(RES_DIR, "SERIAL.csv"))) ##kegg database list for hallmark oxphos genes, change it to whatever gene list
-cds <- estimate_score(cds, gene_markers = gene_markers$SERIAL)
-plot_cells(cds, color_cells_by = 'SerialTransplant', cell_size = 2, show_trajectory_graph = F)  +
-  scale_color_gradientn(colours = mycol)+simple_theme
-
-
-#Diapause score (Dev Cell. 2015 Nov 9; 35(3): 366–382.)
-RES_DIR <- file.path("/Users/ti/Desktop/mouse gene-sets")
-
-estimate_score <- function(cds,gene_markers){
-  cds_gene = cds[fData(cds)$gene_short_name %in% gene_markers,] 
-  aggregate_gene = exprs(cds_gene)
-  aggregate_gene = Matrix::t(Matrix::t(aggregate_gene) / pData(cds_gene)$Size_Factor)
-  aggregate_gene = Matrix::colSums(aggregate_gene)
-  pData(cds)$Diapause = log(aggregate_gene +1) ##not sure if this is really needed?
-  return(cds)
-}
-
-gene_markers <- c(read.csv(file.path(RES_DIR, "Diapause.csv"))) ##kegg database list for hallmark oxphos genes, change it to whatever gene list
-cds <- estimate_score(cds, gene_markers = gene_markers$DIAPAUSE)
-plot_cells(cds, color_cells_by = 'Diapause', cell_size = 2, show_trajectory_graph = F)  +
-  scale_color_gradientn(colours = mycol)+simple_theme
-
+### signature gene sets:
+#serial transplantaable score: Nature volume 583, pages585–589 (2020)
+#Diapause score : Dev Cell. 2015 Nov 9; 35(3): 366–382., Cancer Discov. 2021 Jun;11(6):1542-1561. 
 #WP_CHEMOKINE_SIGNALING_PATHWAY, MM15943, WP2292, http://www.gsea-msigdb.org/gsea/msigdb/mouse/geneset/WP_CHEMOKINE_SIGNALING_PATHWAY.html
-RES_DIR <- file.path("/Users/ti/Desktop/mouse gene-sets")
-
-estimate_score <- function(cds,gene_markers){
-  cds_gene = cds[fData(cds)$gene_short_name %in% gene_markers,] 
-  aggregate_gene = exprs(cds_gene)
-  aggregate_gene = Matrix::t(Matrix::t(aggregate_gene) / pData(cds_gene)$Size_Factor)
-  aggregate_gene = Matrix::colSums(aggregate_gene)
-  pData(cds)$CHEMOKINE = log(aggregate_gene +1) ##not sure if this is really needed?
-  return(cds)
-}
-
-gene_markers <- c(read.csv(file.path(RES_DIR, "CHEMOKINE.csv"))) ##kegg database list for hallmark oxphos genes, change it to whatever gene list
-cds <- estimate_score(cds, gene_markers = gene_markers$CHEMOKINE)
-plot_cells(cds, color_cells_by = 'CHEMOKINE', cell_size = 2, show_trajectory_graph = F)  +
-  scale_color_gradientn(colours = mycol)+simple_theme
-
-
 #High output score: Nature volume 583, pages585–589 (2020)
-RES_DIR <- file.path("/Users/ti/Desktop/mouse gene-sets")
-
-estimate_score <- function(cds,gene_markers){
-  cds_gene = cds[fData(cds)$gene_short_name %in% gene_markers,] 
-  aggregate_gene = exprs(cds_gene)
-  aggregate_gene = Matrix::t(Matrix::t(aggregate_gene) / pData(cds_gene)$Size_Factor)
-  aggregate_gene = Matrix::colSums(aggregate_gene)
-  pData(cds)$HighOutput = log(aggregate_gene +1) ##not sure if this is really needed?
-  return(cds)
-}
-
-gene_markers <- c(read.csv(file.path(RES_DIR, "HIGHOUTPUT.csv"))) ##kegg database list for hallmark oxphos genes, change it to whatever gene list
-cds <- estimate_score(cds, gene_markers = gene_markers$HIGHOUTPUT)
-plot_cells(cds, color_cells_by = 'HighOutput', cell_size = 2, show_trajectory_graph = F)  +
-  scale_color_gradientn(colours = mycol)+simple_theme
-
-
 #Multilineage score: Nature volume 583, pages585–589 (2020)
-RES_DIR <- file.path("/Users/ti/Desktop/mouse gene-sets")
-
-estimate_score <- function(cds,gene_markers){
-  cds_gene = cds[fData(cds)$gene_short_name %in% gene_markers,] 
-  aggregate_gene = exprs(cds_gene)
-  aggregate_gene = Matrix::t(Matrix::t(aggregate_gene) / pData(cds_gene)$Size_Factor)
-  aggregate_gene = Matrix::colSums(aggregate_gene)
-  pData(cds)$Multilineage = log(aggregate_gene +1) ##not sure if this is really needed?
-  return(cds)
-}
-
-gene_markers <- c(read.csv(file.path(RES_DIR, "MULTILIN.csv"))) ##kegg database list for hallmark oxphos genes, change it to whatever gene list
-cds <- estimate_score(cds, gene_markers = gene_markers$MULTILIN)
-plot_cells(cds, color_cells_by = 'Multilineage', cell_size = 2, show_trajectory_graph = F)  +
-  scale_color_gradientn(colours = mycol)+simple_theme
-
-
-#Activated HSC/MMP score (042722 from Brandon)
-RES_DIR <- file.path("/Users/ti/Desktop/mouse gene-sets")
-
-estimate_score <- function(cds,gene_markers){
-  cds_gene = cds[fData(cds)$gene_short_name %in% gene_markers,] 
-  aggregate_gene = exprs(cds_gene)
-  aggregate_gene = Matrix::t(Matrix::t(aggregate_gene) / pData(cds_gene)$Size_Factor)
-  aggregate_gene = Matrix::colSums(aggregate_gene)
-  pData(cds)$ActivatedHSCMPP = log(aggregate_gene +1) ##not sure if this is really needed?
-  return(cds)
-}
-
-gene_markers <- c(read.csv(file.path(RES_DIR, "ACTIVATED.csv"))) ##kegg database list for hallmark oxphos genes, change it to whatever gene list
-cds <- estimate_score(cds, gene_markers = gene_markers$ACTIVATED)
-plot_cells(cds, color_cells_by = 'ActivatedHSCMPP', cell_size = 2, show_trajectory_graph = F)  +
-  scale_color_gradientn(colours = mycol)+simple_theme
-
-
+#Activated HSC/MMP score: : Cell, Volume 169, Issue 5, 18 May 2017, Pages 807-823.e19, Cell Stem Cell, Volume 29, Issue 1, 6 January 2022, Pages 131-148.e10
 #Mouse Gene Set: HALLMARK_MYC_TARGETS_V1, 	MM3887, https://www.gsea-msigdb.org/gsea/msigdb/mouse/geneset/HALLMARK_MYC_TARGETS_V1.html
-RES_DIR <- file.path("/Users/ti/Desktop/mouse gene-sets")
-
-estimate_score <- function(cds,gene_markers){
-  cds_gene = cds[fData(cds)$gene_short_name %in% gene_markers,] 
-  aggregate_gene = exprs(cds_gene)
-  aggregate_gene = Matrix::t(Matrix::t(aggregate_gene) / pData(cds_gene)$Size_Factor)
-  aggregate_gene = Matrix::colSums(aggregate_gene)
-  pData(cds)$MYCV1 = log(aggregate_gene +1) ##not sure if this is really needed?
-  return(cds)
-}
-
-gene_markers <- c(read.csv(file.path(RES_DIR, "MYCV1.csv"))) ##kegg database list for hallmark oxphos genes, change it to whatever gene list
-cds <- estimate_score(cds, gene_markers = gene_markers$MYCV1)
-plot_cells(cds, color_cells_by = 'MYCV1', cell_size = 2, show_trajectory_graph = F)  +
-  scale_color_gradientn(colours = mycol)+ simple_theme
-
-
 #Mouse Gene Set: HALLMARK_MYC_TARGETS_V2, MM2888, https://www.gsea-msigdb.org/gsea/msigdb/mouse/geneset/HALLMARK_MYC_TARGETS_V2.html
-RES_DIR <- file.path("/Users/ti/Desktop/mouse gene-sets")
-
-estimate_score <- function(cds,gene_markers){
-  cds_gene = cds[fData(cds)$gene_short_name %in% gene_markers,] 
-  aggregate_gene = exprs(cds_gene)
-  aggregate_gene = Matrix::t(Matrix::t(aggregate_gene) / pData(cds_gene)$Size_Factor)
-  aggregate_gene = Matrix::colSums(aggregate_gene)
-  pData(cds)$MYCV2 = log(aggregate_gene +1) ##not sure if this is really needed?
-  return(cds)
-}
-
-gene_markers <- c(read.csv(file.path(RES_DIR, "MYCV2.csv"))) ##kegg database list for hallmark oxphos genes, change it to whatever gene list
-cds <- estimate_score(cds, gene_markers = gene_markers$MYCV2)
-plot_cells(cds, color_cells_by = 'MYCV2', cell_size = 2, show_trajectory_graph = F)  +
-  scale_color_gradientn(colours = mycol)+simple_theme
-
 #WP_TCA_CYCLE, MM15856, WP434, http://www.gsea-msigdb.org/gsea/msigdb/mouse/geneset/WP_TCA_CYCLE.html
-RES_DIR <- file.path("/Users/ti/Desktop/mouse gene-sets")
-
-estimate_score <- function(cds,gene_markers){
-  cds_gene = cds[fData(cds)$gene_short_name %in% gene_markers,] 
-  aggregate_gene = exprs(cds_gene)
-  aggregate_gene = Matrix::t(Matrix::t(aggregate_gene) / pData(cds_gene)$Size_Factor)
-  aggregate_gene = Matrix::colSums(aggregate_gene)
-  pData(cds)$TCACYCLE = log(aggregate_gene +1) ##not sure if this is really needed?
-  return(cds)
-}
-
-gene_markers <- c(read.csv(file.path(RES_DIR, "TCACYCLE.csv"))) ##kegg database list for hallmark oxphos genes, change it to whatever gene list
-cds <- estimate_score(cds, gene_markers = gene_markers$TCACYCLE)
-plot_cells(cds, color_cells_by = 'TCACYCLE', cell_size = 2, show_trajectory_graph = F)  +
-  scale_color_gradientn(colours = mycol)+ simple_theme
-
-
-#	HALLMARK_OXIDATIVE_PHOSPHORYLATION, MM3893, http://www.gsea-msigdb.org/gsea/msigdb/mouse/geneset/HALLMARK_OXIDATIVE_PHOSPHORYLATION.html,  http://www.broadinstitute.org/gsea/msigdb/cards/HALLMARK_OXIDATIVE_PHOSPHORYLATION
-RES_DIR <- file.path("/Users/ti/Desktop/mouse gene-sets")
-
-estimate_score <- function(cds,gene_markers){
-  cds_gene = cds[fData(cds)$gene_short_name %in% gene_markers,] 
-  aggregate_gene = exprs(cds_gene)
-  aggregate_gene = Matrix::t(Matrix::t(aggregate_gene) / pData(cds_gene)$Size_Factor)
-  aggregate_gene = Matrix::colSums(aggregate_gene)
-  pData(cds)$OXOPHOS = log(aggregate_gene +1) ##not sure if this is really needed?
-  return(cds)
-}
-
-gene_markers <- c(read.csv(file.path(RES_DIR, "OXOPHOS.csv"))) ##kegg database list for hallmark oxphos genes, change it to whatever gene list
-cds <- estimate_score(cds, gene_markers = gene_markers$OXOPHOS)
-plot_cells(cds, color_cells_by = 'OXOPHOS', cell_size = 2, show_trajectory_graph = F)  +
-  scale_color_gradientn(colours = mycol)+ simple_theme
-
-#	Mouse Gene Set: WP_PURINE_METABOLISM,	WP2185, https://www.gsea-msigdb.org/gsea/msigdb/mouse/geneset/WP_PURINE_METABOLISM.html
-RES_DIR <- file.path("/Users/ti/Desktop/mouse gene-sets")
-
-estimate_score <- function(cds,gene_markers){
-  cds_gene = cds[fData(cds)$gene_short_name %in% gene_markers,]
-  aggregate_gene = exprs(cds_gene)
-  aggregate_gene = Matrix::t(Matrix::t(aggregate_gene) / pData(cds_gene)$Size_Factor)
-  aggregate_gene = Matrix::colSums(aggregate_gene)
-  pData(cds)$PurineMetabolism = log(aggregate_gene +1) ##not sure if this is really needed?
-  return(cds)
-}
-
-gene_markers <- c(read.csv(file.path(RES_DIR, "PURINEMETABO.csv"))) ##kegg database list for hallmark oxphos genes, change it to whatever gene list
-cds <- estimate_score(cds, gene_markers = gene_markers$PURINEMETABO)
-plot_cells(cds, color_cells_by = 'PurineMetabolism', cell_size = 2, show_trajectory_graph = F)  +
-  scale_color_gradientn(colours = mycol)+simple_theme
+#HALLMARK_OXIDATIVE_PHOSPHORYLATION, MM3893, http://www.gsea-msigdb.org/gsea/msigdb/mouse/geneset/HALLMARK_OXIDATIVE_PHOSPHORYLATION.html,  http://www.broadinstitute.org/gsea/msigdb/cards/HALLMARK_OXIDATIVE_PHOSPHORYLATION
+#Mouse Gene Set: WP_PURINE_METABOLISM,	WP2185, https://www.gsea-msigdb.org/gsea/msigdb/mouse/geneset/WP_PURINE_METABOLISM.html
 
 
 #Heatmap
@@ -594,14 +352,3 @@ pheatmap(mat[c("Dormancy", "SerialTransplant","Diapause"
          , legend=F, show_rownames = F, show_colnames = F, cluster_cols=F, cluster_rows = F
          , cellheight = 20
          , cellwidth = 35) 
-
-# #show annotation
-pheatmap(mat[c("Dormancy", "SerialTransplant","Diapause"
-               ,"CHEMOKINE"
-               ,"HighOutput", "Multilineage","ActivatedHSCMPP"
-               ,"MYCV1","MYCV2"
-               ,"TCACYCLE","OXOPHOS","PurineMetabolism")
-             ,c("A","B","C","D","E","F","G","H","I","J","K")]
-         , fontsize = 15, legend=T, show_rownames = T, show_colnames = T, cluster_cols=F, cluster_rows = F
-         , cellheight = 25
-         , cellwidth = 25) 
