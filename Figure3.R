@@ -220,6 +220,7 @@ plot_cells(cds, color_cells_by = 'Dormancy', cell_size = 2, show_trajectory_grap
 #serial transplantaable score: Nature volume 583, pages585–589 (2020)
 #Diapause score : Dev Cell. 2015 Nov 9; 35(3): 366–382., Cancer Discov. 2021 Jun;11(6):1542-1561. 
 #WP_CHEMOKINE_SIGNALING_PATHWAY, MM15943, WP2292, http://www.gsea-msigdb.org/gsea/msigdb/mouse/geneset/WP_CHEMOKINE_SIGNALING_PATHWAY.html
+#Commonly upregulated dormancy genes : Nat Cell Biol. 2024 Feb;26(2):181-193. doi: 10.1038/s41556-023-01325-3.
 #High output score: Nature volume 583, pages585–589 (2020)
 #Multilineage score: Nature volume 583, pages585–589 (2020)
 #Activated HSC/MMP score: : Cell, Volume 169, Issue 5, 18 May 2017, Pages 807-823.e19, Cell Stem Cell, Volume 29, Issue 1, 6 January 2022, Pages 131-148.e10
