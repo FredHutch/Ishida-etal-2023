@@ -10,7 +10,7 @@ RecLigAll = read.csv(file.path(RES_DIR, "RecLigPairs.csv"))  # read csv file of 
 #Receptor : Read HSC colonies
 RES_DIR <- file.path(RES_DIR <- file.path("/Users"))
 #Read
-cds <- readRDS(file.path(RES_DIR, "Figure4.RDS"))
+cds <- readRDS(file.path(RES_DIR, "Figure5.RDS"))
 
 cds1 <- cds[,colData(cds)$identifier == "Engraft"]   
 cds1 <- detect_genes(cds1, min_expr = 0.1)  
@@ -24,7 +24,7 @@ write.csv(cds1_receptors, file.path(RES_DIR, "cds1_receptors.csv"))
 #Ligand : FL-AKT-EC
 RES_DIR <- file.path("/Users")
 #Read
-cds2 <- readRDS(file.path(RES_DIR, "Figure7FLAKTEC.RDS"))
+cds2 <- readRDS(file.path(RES_DIR, "Figure6FLAKTEC.RDS"))
 
 
 cds2 <- detect_genes(cds2, min_expr = 0.1)    
