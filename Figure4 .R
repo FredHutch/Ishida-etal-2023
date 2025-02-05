@@ -93,11 +93,11 @@ RES_DIR <- file.path(RES_DIR <- file.path("/Users"))
 
 #Save
 #whole
-saveRDS(cds, file.path(RES_DIR, "Figure3.RDS")) 
+saveRDS(cds, file.path(RES_DIR, "Figure4.RDS")) 
 #Read
-cds <- readRDS(file.path(RES_DIR, "Figure3.RDS"))
+cds <- readRDS(file.path(RES_DIR, "Figure4.RDS"))
 
-#Figure S2B-D
+#Figure S4B-D
 plot_cells(cds, genes=c("Esam"), cell_size = 4, label_cell_groups = F)+ simple_themeT
 plot_cells(cds, genes=c("Fgd5"), cell_size = 4, label_cell_groups = F)+ simple_themeT
 plot_cells(cds, genes=c("Hlf"), cell_size = 4, label_cell_groups = F)+ simple_themeT
@@ -158,7 +158,7 @@ plot_cells(cds, color_cells_by = 'proliferation_index', cell_size = 2, show_traj
   scale_color_gradientn(colours = mycol) + simple_theme
 
 
-##Figure3B-D, FigureS4E
+##Figure4B-D, FigureS4E
 #cluster cells
 set.seed(1)
 cds <- cluster_cells(cds, resolution=0.2, random_seed = 1)
@@ -285,7 +285,7 @@ names(cds@colData)
 avg_score_heatmap(cds, "group", 
                   c("GENES"))
 
-#Figure3E, FigureS2E
+#Figure4E, FigureS4E
 #Gene module analysis
 pr_graph_test_res <- graph_test(cds, neighbor_graph="knn", cores=8)
 pr_deg_ids <- row.names(subset(pr_graph_test_res, q_value < 0.05))
