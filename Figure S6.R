@@ -1,5 +1,4 @@
 #J Dev Biol. 2023 Jun; 11(2): 15. , Published online 2023 Mar 23. doi: 10.3390/jdb11020015
-#sort PI- singlets (no surface marker in Figure1)
 #A foetal liver scRNA-seq dataset was generated from an E12.5 C57BL/6J foetal liver. 
 library(monocle3)
 library(VGAM) 
@@ -153,13 +152,13 @@ cds<- cds_mito_filter
 cds
 
 #Save
-saveRDS(cds, file.path(RES_DIR, "Figure S3.RDS")) 
+saveRDS(cds, file.path(RES_DIR, "Figure S6.RDS")) 
 
 cds
 summary(colData(cds)$n.umis)
 summary(pData(cds)$num_genes_expressed)
 
-#Figure S3A,B 
+#Figure S6A,B 
 plot_cells(cds, genes=c("Ptprc"), cell_size = 2, label_cell_groups = F)+ simple_theme
 plot_cells(cds, genes=c("Cd34"), cell_size = 2, label_cell_groups = F)+ simple_theme
 plot_cells(cds, genes=c("Mpo"), cell_size = 2, label_cell_groups = F)+ simple_theme
@@ -176,7 +175,7 @@ plot_cells(cds, genes=c("Mpo"), cell_size = 2, label_cell_groups = F)+ simple_th
 
 cds<-choose_cells(cds)
 
-#Figure S3C
+#Figure S6C
 ### Estimate proliferation index (Cell Rep. 2021 Sep 14;36(11):109675. doi: 10.1016/j.celrep.2021.109675.)
 estimate_cell_cycle <- function(cds, g1s_markers, g2m_markers){
   cds_g1s = cds[fData(cds)$gene_short_name %in% g1s_markers,]
@@ -208,7 +207,7 @@ mycol <- c("navy", "blue", "cyan", "lightcyan", "yellow", "red", "red4")
 plot_cells(cds, color_cells_by = 'proliferation_index', cell_size = 2, show_trajectory_graph = F)  +
   scale_color_gradientn(colours = mycol) + simple_theme
 
-#Figure S3D, E, F
+#Figure S6D, E, F
 #cluster cells
 set.seed(1)
 cds <- cluster_cells(cds, resolution=0.2, random_seed = 1)
@@ -281,7 +280,7 @@ write.csv(mod1_genes_names, "/Users/mod1.csv")
 
 #use the code for the rest of modules
 
-#Figure S3G
+#Figure S6G
 #Gene-set scores
 #color 
 mycol <- c("navy", "blue", "cyan", "lightcyan", "yellow", "red", "red4")
