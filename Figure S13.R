@@ -82,7 +82,7 @@ summary(colData(cds)$n.umis)
 summary(pData(cds)$num_genes_expressed)
 cds
 
-#Figure S10A-C
+#Figure S13A-C
 #Nichenetr
 #Receptor-Ligand interaction analysis by Nichenetr
 simple_theme <-  theme(text = element_blank(),
@@ -128,7 +128,7 @@ dim(ligand_target_matrix)
 #location
 RES_DIR <- file.path(RES_DIR <- file.path("/Users"))
 #Read
-cds <- readRDS(file.path(RES_DIR, "Figure4.RDS"))
+cds <- readRDS(file.path(RES_DIR, "Figure5.RDS"))
 colData(cds)
 #Hash-HSC: engraft vs non-engraft
 cds2 <- cds[,(colData(cds)$identifier == "Engraft"),] 
@@ -146,7 +146,7 @@ length(cds2_exp)
 RES_DIR <- file.path(RES_DIR <- file.path("/Users"))
 
 #Read
-cds3 <- readRDS(file.path(RES_DIR, "Figure S10.RDS"))
+cds3 <- readRDS(file.path(RES_DIR, "Figure S13.RDS"))
 cds3 <- detect_genes(cds3, min_expr = 0.1)    
 rowData(cds3)$use_for_rec_list <- rowData(cds3)$num_cells_expressed > (0.10 * ncol(cds3)) ### detect genes expressed in >10% of cells
 cds3_exp <- (subset(rowData(cds3), rowData(cds3)$use_for_rec_list == TRUE))$gene_short_name  ###create list of genes
