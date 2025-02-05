@@ -316,12 +316,12 @@ RES_DIR <- file.path(RES_DIR <- file.path("/Users"))
 
 #Save
 #whole
-saveRDS(cds, file.path(RES_DIR, "Figure4.RDS")) 
+saveRDS(cds, file.path(RES_DIR, "Figure5.RDS")) 
 #Read
-cds <- readRDS(file.path(RES_DIR, "Figure4.RDS"))
+cds <- readRDS(file.path(RES_DIR, "Figure5.RDS"))
 
 
-#Figure S4C
+#Figure S8C
 plot_cells(cds, genes=c("Esam"), cell_size = 4, label_cell_groups = F)+ simple_themeT
 plot_cells(cds, genes=c("Fgd5"), cell_size = 4, label_cell_groups = F)+ simple_themeT
 plot_cells(cds, genes=c("Hlf"), cell_size = 4, label_cell_groups = F)+ simple_themeT
@@ -339,7 +339,7 @@ plot_cells(cds, genes=c("Flt3"),cell_size = 4, label_cell_groups = F)+ simple_th
 plot_cells(cds, genes=c("Il7r"),cell_size = 4, label_cell_groups = F)+ simple_themeT
 plot_cells(cds, genes=c("Ccl5"),cell_size = 4, label_cell_groups = F)+ simple_themeT
 
-#Figure 4C and D, Figure S5B
+#Figure 5C and D, Figure S8B
 set.seed(1)
 cds <- cluster_cells(cds, resolution=1.5e-2, random_seed = 1)
 plot_cells(cds, color_cells_by="cluster", group_cells_by="cluster", cell_size = 2, group_label_size=20)+simple_theme
@@ -362,7 +362,7 @@ head(pData(cds))
 table(pData(cds)$cluster)
 
 
-#Figure4H, Figure S5C
+#Figure5H, Figure S8C
 pr_graph_test_res <- graph_test(cds, neighbor_graph="knn", cores=8)
 pr_deg_ids <- row.names(subset(pr_graph_test_res, q_value < 0.05))
 
@@ -434,7 +434,7 @@ identity_DEG <- identity_terms %>% filter (q_value < 0.05) %>%
 write.csv(identity_DEG,"/Users/Data.csv")
 
 
-#Figure4E-G, Figure S4D and E, Figure S5A, D and G
+#Figure5E-G, Figure S8D and E, Figure S9A, D and G
 #color
 mycol <- c("navy", "blue", "cyan", "lightcyan", "yellow", "red", "red4")
 cell_type_color1 <- c("No engraft"="gray","Engraft" = "red")
@@ -497,7 +497,7 @@ p
 #Serially engrafting FL-HSC genes(Table S5)
 
 
-#Figure S5F
+#Figure S9F
 #E9&E9.5 data (Cell Rep. 2021 Sep 14;36(11):109675. doi: 10.1016/j.celrep.2021.109675.)
 #https://github.com/FredHutch/dignum-etal-2021/blob/main/TD%20Manuscript%20Code%20vs042021.R
 #Designate the location
@@ -551,7 +551,7 @@ p <- p + theme(panel.grid.major= element_blank(), panel.grid.minor = element_bla
 p <- p+theme(legend.position = "none") + theme(text = element_text(size=15))
 p
 
-#Figure S5H
+#Figure S9H
 #Esam expression, violin
 cell_type_color1 <- c("No engraft"="gray","Engraft" = "red")
 
