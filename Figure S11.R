@@ -342,13 +342,13 @@ cds<-big_cds
 #location
 RES_DIR <- file.path(RES_DIR <- file.path("/Users"))
 #Save
-saveRDS(cds, file.path(RES_DIR, "Figure S8.RDS")) 
+saveRDS(cds, file.path(RES_DIR, "Figure S11.RDS")) 
 
 set.seed(1)
 cds <- cluster_cells(cds, resolution=1e-2, random_seed = 1)
 plot_cells(cds, color_cells_by="cluster", group_cells_by="cluster", cell_size = 2, group_label_size=20)+simple_theme
 
-#Figure S8B-C
+#Figure S11B-C
 plot_cells(cds, color_cells_by = "identity", label_cell_groups = F, cell_size = 2) 
 plot_cells(cds, color_cells_by = "identity", label_cell_groups = F, cell_size = 2) + simple_theme
 table(cds$identity)
@@ -367,7 +367,7 @@ colData(cds)
 head(pData(cds))
 table(pData(cds)$cluster)
 
-#Figure S8D-H
+#Figure S11D-H
 #Dormancy score (Cell . 2017 May 18;169(5):807-823.e19.)
 RES_DIR <- file.path("/Users")
 
@@ -461,7 +461,7 @@ p <- ggplot(df, aes(x= identifier, y=proliferation_index, fill = identifier)) + 
 p <- p + stat_compare_means() + stat_mean()  
 p
 
-#Figure S8I
+#Figure S11I
 #q<0.05
 pr_graph_test_res <- graph_test(cds, neighbor_graph="knn", cores=8)
 pr_deg_ids <- row.names(subset(pr_graph_test_res, q_value < 0.05))
