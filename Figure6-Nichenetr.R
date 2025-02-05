@@ -1,4 +1,4 @@
-#Figure7A-C
+#Figure6A-C
 writeLines(capture.output(sessionInfo()), "sessionInfoNichenetr.txt")
 
 #Load FL-AKT-EC
@@ -54,7 +54,7 @@ plot_cells(cds, color_cells_by="cluster", group_cells_by="cluster", cell_size = 
 
 #Save
 RES_DIR <- file.path(RES_DIR <- file.path("/Users"))
-saveRDS(cds, file.path(RES_DIR, "Figure7 FLAKTEC.RDS")) 
+saveRDS(cds, file.path(RES_DIR, "Figure6 FLAKTEC.RDS")) 
 
 
 
@@ -102,7 +102,7 @@ dim(ligand_target_matrix)
 #location
 RES_DIR <- file.path(RES_DIR <- file.path("/Users"))
 #Read
-cds <- readRDS(file.path(RES_DIR, "Figure4.RDS"))
+cds <- readRDS(file.path(RES_DIR, "Figure5.RDS"))
 colData(cds)
 cds2 <- cds[,(colData(cds)$identifier == "Engraft"),] 
 colData(cds2)
@@ -116,7 +116,7 @@ length(cds2_exp)
 #location
 RES_DIR <- file.path("/Users")
 #Read
-cds3 <- readRDS(file.path(RES_DIR, "Figure7 FLAKTEC.RDS"))
+cds3 <- readRDS(file.path(RES_DIR, "Figure6 FLAKTEC.RDS"))
 cds3 <- detect_genes(cds3, min_expr = 0.1)    
 rowData(cds3)$use_for_rec_list <- rowData(cds3)$num_cells_expressed > (0.10 * ncol(cds3)) ### detect genes expressed in >10% of cells
 cds3_exp <- (subset(rowData(cds3), rowData(cds3)$use_for_rec_list == TRUE))$gene_short_name  ###create list of genes
