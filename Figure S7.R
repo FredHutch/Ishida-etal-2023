@@ -146,9 +146,9 @@ cds<-choose_cells(cds)
 
 #save cds
 RES_DIR <- file.path("/Users")
-saveRDS(cds, file.path(RES_DIR, "/Users/Figure S11")) 
+saveRDS(cds, file.path(RES_DIR, "/Users/Figure S7")) 
 
-#Figure S11B
+#Figure S7B
 #clustering
 set.seed(1)
 cds <- cluster_cells(cds, resolution=0.05, random_seed = 1)
@@ -194,7 +194,7 @@ plot_cells(cds, color_cells_by = "group", cell_size=2, label_cell_groups=T, grou
 #color 
 mycol <- c("navy", "blue", "cyan", "lightcyan", "yellow", "red", "red4")
 
-#Figure S11C
+#Figure S7C
 #Cell Stem Cell. 2021 Oct 7;28(10):1838-1850.e10.
 RES_DIR <- file.path("-")
 estimate_score <- function(cds,gene_markers){
@@ -247,7 +247,7 @@ pheatmap(mat[c("HSCPRIMED","Activated","MYCV1","MYCV2"
          , cellheight = 40
          , cellwidth = 75) 
 
-#Figure S11D-E
+#Figure S7D-E
 #Gene module analysis
 pr_graph_test_res <- graph_test(cds, neighbor_graph="knn", cores=8)
 pr_deg_ids <- row.names(subset(pr_graph_test_res, q_value < 0.05))
