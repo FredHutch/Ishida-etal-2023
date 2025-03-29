@@ -469,32 +469,25 @@ pr_deg_ids <- row.names(subset(pr_graph_test_res, q_value < 0.05))
 set.seed(1) #set.seed and random seed set here to avoid variable output due to random number generator in function
 gene_module_df <- find_gene_modules(cds[pr_deg_ids,], resolution=0.00005, random_seed = 1)
 
-### plot gene modules by cluster in pheatmap
-cell_group_df <- tibble::tibble(cell=row.names(colData(cds)), 
-                                cell_group=clusters(cds)[colnames(cds)])
-
-agg_mat <- aggregate_gene_expression(cds, gene_module_df, cell_group_df)
-row.names(agg_mat) <- stringr::str_c("Module ", row.names(agg_mat))
-colnames(agg_mat) <- stringr::str_c("cluster", colnames(agg_mat))
-
-pheatmap::pheatmap(agg_mat, cluster_rows=TRUE, cluster_cols=TRUE,
-                   scale="column", clustering_method="ward.D2",
-                   fontsize=12)
-
-pheatmap::pheatmap(agg_mat, cluster_rows=TRUE, cluster_cols=TRUE, legend=F ,show_rownames = F, show_colnames = F,
-                   scale="column", clustering_method="ward.D2",
-                   fontsize=12)
+#### plot gene modules in UMAP 
+plot_cells(cds, cell_size = 4,
+           genes=gene_module_df %>% filter(module %in% c(1,2,3,4)),
+           label_cell_groups=FALSE,
+           show_trajectory_graph=FALSE,
+           scale_to_range = TRUE,
+           min_expr = 60) +scale_color_gradientn(colors=c("gray80", "darkgreen", "darkgreen"))+simple_theme
 
 ### plot gene modules by colony type in pheatmap
 cell_group_df <- tibble::tibble(cell=row.names(colData(cds)), 
-                                cell_group=colData(cds)$identifier)  
+                                cell_group=colData(cds)$identity)  
 agg_mat <- aggregate_gene_expression(cds, gene_module_df, cell_group_df)
 colnames(agg_mat) <- stringr::str_c("", colnames(agg_mat))
 
-pheatmap::pheatmap(agg_mat[c("2","4","1","3"),c("ESAM+HSC", "ESAM-HSC")]
+pheatmap::pheatmap(agg_mat[c("2","4","1","3"),c("B301","B302","B303","B304","B305","B306","B307")]
                    ,cluster_rows=FALSE, cluster_cols=FALSE
                    ,scale="column", clustering_method="ward.D2"
-                   ,fontsize=12, show_rownames = T, show_colnames = T, legend=T, cellheight = 50, cellwidth = 20) 
+                   ,fontsize=12, show_rownames = T, show_colnames = T, legend=T, cellheight = 40, cellwidth = 50) 
+
 
 #pulling out genes in each module
 mod1_genes<-gene_module_df%>%dplyr::filter(module==1)
